@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const handleLogin = async (req, res) => {
     const cookies = req.cookies;
-
+    console.log(req.body)
     const { user, pwd } = req.body;
     if (!user || !pwd) return res.status(400).json({ 'message': 'Username and password are required.' });
 
@@ -25,6 +25,8 @@ const handleLogin = async (req, res) => {
             process.env.ACCESS_TOKEN_SECRET,
             { expiresIn: '10s' }
         );
+        console.log("HERE2")
+        console.log(roles)
         const newRefreshToken = jwt.sign(
             { "username": foundUser.username },
             process.env.REFRESH_TOKEN_SECRET,
